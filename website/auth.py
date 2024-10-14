@@ -66,6 +66,7 @@ def sign_up():
             password=password
         )
 
+
         db.session.add(new_user)
         db.session.commit()
 
