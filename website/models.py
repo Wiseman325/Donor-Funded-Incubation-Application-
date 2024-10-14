@@ -7,7 +7,7 @@ import os
 from werkzeug.utils import secure_filename
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    _id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
@@ -21,8 +21,11 @@ class User(db.Model, UserMixin):
     matric_statement = db.Column(db.String(255))
     cv = db.Column(db.String(255))
     other_supporting_documents = db.Column(db.String(255))
-    saved_financial_aid = db.relationship('SavedFinancialAid')
-    userAlert = db.relationship('UserAlert')
+    # course_id = db.Column(db.Integer, db.ForeignKey('course._id'), nullable=False)
+
+
+    def get_id(self):
+        return str(self._id)
 
     def upload_file(self, field_name, file):
         file_ext = os.path.splitext(file.filename)[1]
@@ -62,33 +65,53 @@ class User(db.Model, UserMixin):
         self.delete_file('other_supporting_documents')
 
 
+class Course(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(80))
+    duration = db.Column(db.Integer)
+    cost = db.Column(db.Integer)
+    # students = db.relationship('User', backref='course', lazy=True)
+
+class Donor(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    surname = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    phone_number = db.Column(db.String(80))
+    organisation = db.Column(db.String(80))
+    amount = db.Column(db.Integer)
+    payments = db.relationship('Payment', backref='donor', lazy=True)
+    certificates = db.relationship('Certificate', backref='donor', lazy=True)
+
+class Certificate(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    issue_date = db.Column(db.Date)
+    message = db.Column(db.String(80))
+    signature = db.Column(db.String(80))
+    donor_id = db.Column(db.Integer, db.ForeignKey('donor._id'), nullable=False)
+
+class Payment(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Integer)
+    date = db.Column(db.Date)
+    payment_method = db.Column(db.String(100))
+    donor_id = db.Column(db.Integer, db.ForeignKey('donor._id'), nullable=False)
+
 class FinancialAid(db.Model):
-    id = db.Column(Integer, primary_key=True)
-    title = db.Column(String(255), nullable=False)
-    type = db.Column(String(150), nullable=False)
-    description = db.Column(Text, nullable=False)
-    eligibility_criteria = db.Column(Text, nullable=False)
-    opening_date = db.Column(Date, nullable=False)
-    deadline = db.Column(Date, nullable=False)
-    contact_details = db.Column(String(255), nullable=False)
-    link_to_more_information = db.Column(String(255))  # Allow null values for optional link
-    date_added = db.Column(Date, nullable=False, default=date.today)
-    saved_financial_aid = db.relationship('SavedFinancialAid')
-    userAlert = db.relationship('UserAlert')
+    _id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('user._id'), nullable=False)
+    donor_id = db.Column(db.Integer, db.ForeignKey('donor._id'), nullable=False)
+    application_status = db.Column(db.String(100))
+    application_date = db.Column(db.Date)
 
 
-class SavedFinancialAid(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    financial_aid_id = db.Column(db.Integer, db.ForeignKey('financial_aid.id'), nullable=False)
-    date_saved = db.Column(db.DateTime)
-
-
-class UserAlert(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    financial_aid_id = db.Column(db.Integer, db.ForeignKey('financial_aid.id'), nullable=False)
-    reminder_date = db.Column(db.DateTime)
-    reminder_message = db.Column(db.Text)
-
-
+# Create a database model for the application
+class Application(db.Model):
+    _id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    course = db.Column(db.String(100), nullable=False)
+    financial_need = db.Column(db.Text, nullable=False)
+    last_grade = db.Column(db.String(50), nullable=False)

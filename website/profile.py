@@ -12,7 +12,7 @@ profile = Blueprint('profile', __name__)
 @profile.route('/profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    user = User.query.get(current_user.id)
+    user = User.query.get(current_user._id)
 
     if request.method == 'POST':
         first_name = request.form.get('firstName')
@@ -94,7 +94,7 @@ def edit_profile():
 @profile.route('/change-password', methods=['GET', 'POST'])
 @login_required
 def change_password():
-    user = User.query.get(current_user.id)
+    user = User.query.get(current_user._id)
 
     if request.method == 'POST':
         current_password = request.form.get('currentPassword')

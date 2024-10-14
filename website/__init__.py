@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(profile ,url_prefix='/')
 
 
-    from .models import User ,FinancialAid, SavedFinancialAid ,UserAlert
+    from .models import User ,FinancialAid ,Payment ,Certificate ,Donor ,Course 
 
     create_database(app)
 
