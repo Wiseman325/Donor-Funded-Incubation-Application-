@@ -3,12 +3,14 @@
 {% block content%}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Login</title>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -18,39 +20,28 @@
                         <h3 class="text-center">Login</h3>
                     </div>
                     <div class="card-body">
-                        <form method="POST">
+                        <form method="POST" action="login">
+                            {{ form.hidden_tag() }}
                             <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Enter email"
-                                />
+                                {{ form.email.label(class="form-label") }}
+                                {{ form.email(class="form-control") }}
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Enter password"
-                                />
+                                {{ form.password.label(class="form-label") }}
+                                {{ form.password(class="form-control") }}
                             </div>
                             <br>
                             <div class="form-group text-center">
-                              <button type="submit" class="btn btn-primary">Login</button>
+                                {{ form.submit_btn(class="btn btn-primary")}}
                             </div>
                             <br>
-                            <a href="/sign-up" class="float-right">Don't have an account? Register</a>
+                            <p>Don't have an account? <a href="/sign-up" class="float-right"> Register</a></p>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   
 
-{% endblock%}
+
+    {% endblock%}

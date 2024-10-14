@@ -3,34 +3,38 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
+from .forms import LoginForm, RegistrationForm
 
 auth = Blueprint('auth', __name__)
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+    form = LoginForm()
 
-        user = User.query.filter_by(email=email).first()
-                
-        if email == "BursaryboostAdmin@gmail.com" and password == "BursaryboostAdmin":
-            session['email'] = email
-            # login_user(user, remember=True)
-            flash('Logged in successfully as admin!', category='success')
-            return redirect(url_for('views.admin'))
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
         if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
-                session['email'] = email
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+            """
+            if user.email == "BursaryboostAdmin@gmail.com" and user.password == "BursaryboostAdmin":
+                session['email'] = user.email
+                # login_user(user, remember=True)
+                flash('Logged in successfully as admin!', category='success')
+                return redirect(url_for('views.admin'))"""
+            if user.email == form.email.data:
+                if check_password_hash(user.password, form.password.data):
+                    flash('Logged in successfully!', category='success')
+                    session['email'] = form.email.data
+                    login_user(user, remember=True)
+                    return redirect(url_for('views.home'))
+                else:
+                    flash('Incorrect password, try again.', category='error')
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Email address not for registered user', category='error')
         else:
-            flash('Email does not exist.', category='error')
-
-    return render_template("login.html", user=current_user)
+            flash('Invalid email address or password. try again.', category='error')
+    print(505)
+    return render_template("login.html", form=form)
 
 
 @auth.route('/logout')
@@ -41,38 +45,34 @@ def logout():
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        first_name = request.form.get('firstName')
-        last_name = request.form.get('lastName')
-        phone_number = request.form.get('phoneNumber')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
+    form = RegistrationForm()
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('Email already exists.', category='error')
-        elif len(email) < 5:
-            flash('Email must be greater than 4 characters', category='error')
-        elif len(first_name) < 3:
-            flash('First name must be greater than 2 characters', category='error')
-        elif len(last_name) < 3:
-            flash('Last name must be greater than 2 characters', category='error')
-        elif len(phone_number) < 10:
-            flash('Phone number cannot be less than 10 characters', category='error')
-        elif password1 != password2:
-            flash('Passwords do not match', category='error')
-        elif len(password1) < 8:
-            flash('Password must be at least 8 characters', category='error')
-        else:
-            new_user = User(email=email ,first_name=first_name ,last_name=last_name, phone_number=phone_number, password=generate_password_hash(password1, method='pbkdf2:sha256'))
-            db.session.add(new_user)
-            db.session.commit()
-            if user:
-                if user.is_active:
-                 login_user(user, remember=True)
-            flash('Account created successfull' ,category='success')
-            return redirect(url_for('views.home'))
+    if form.validate_on_submit():
+        existing_email =    User.query.filter_by(email=form.email_address.data).first()
+        if existing_email:
+            flash('Email already exists!', category='error')
+            return redirect(url_for('auth.sign_up'))
+
+        if form.password.data != form.confirm_password.data:
+            flash('Passwords do not match!', category='error')
+            return redirect(url_for('auth.sign_up'))
+
+        password=generate_password_hash(form.password.data, method='pbkdf2:sha256')
+        new_user = User(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email_address.data,
+            phone_number=form.phone_number.data,
+            password=password
+        )
 
 
-    return render_template("sign_up.html", user=current_user)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Registration Successful!', category='success')
+        return redirect(url_for('auth.login'))
+    else:
+        for _, msg in form.errors.items():
+            flash(msg[0], category='error')
+    return render_template('sign_up.html', form=form)
