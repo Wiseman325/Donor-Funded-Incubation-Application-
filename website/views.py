@@ -5,12 +5,34 @@ from . import db
 from datetime import date, datetime
 
 
+# courses
+courses_list = [
+        {"name": "Introduction to Python", "category": "Programming", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Web Development Basics", "category": "Web Development", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Data Science with Python", "category": "Data Science", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Machine Learning 101", "category": "Artificial Intelligence", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Digital Marketing", "category": "Marketing", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Graphic Design Essentials", "category": "Design", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Business Management", "category": "Business", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Financial Analysis", "category": "Finance", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Cybersecurity Basics", "category": "IT", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Ethical Hacking", "category": "IT", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Mobile App Development", "category": "Mobile Development", "image_url": "https://via.placeholder.com/400x300"},
+        {"name": "Blockchain Fundamentals", "category": "Blockchain", "image_url": "https://via.placeholder.com/400x300"},
+    ]
+
 views = Blueprint('views', __name__)
 
 @views.route('/')
 @login_required
 def home():
     return render_template("home.html", user=current_user)
+
+@views.route('/courses')
+@login_required
+def courses():
+    return render_template("courses.html", courses=courses_list)
+
 
 # View financial aids
 # @views.route('/finacial-aid', methods=['GET'])
