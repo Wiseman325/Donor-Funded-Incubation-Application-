@@ -13,6 +13,7 @@
 ![image](https://github.com/user-attachments/assets/9b991e24-aeb2-4211-b774-0a30cce96e67)
 3. Open the codespace under VSCode or any other IDE.
 4. fetch all changes by running **git fetch**
+   - If you experience issues fetching try **git pull** any futher issues can be resolved by **git pull --rebase** or just seach the error you have encountered.
 5. check if you are up to date by running **git status**
 6. If you are up to date make any changes and run **git add .** to add all changes
 7. **git commit -m "{msg}"** where **{msg}** is any message you would like to write, describing your changes.
