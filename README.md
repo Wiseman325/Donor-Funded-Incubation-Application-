@@ -18,3 +18,8 @@
 6. If you are up to date make any changes and run **git add .** to add all changes
 7. **git commit -m "{msg}"** where **{msg}** is any message you would like to write, describing your changes.
 8. **git push** to push changes
+
+### Github Isues?
+- If you have worked on your code and founded our you are behind?
+-- use **git pull** to pull changes
+- Unable to push/sync changes? If you have commited changes and later found out you are behind, no problem, just type **git pull --rebase**. this will pull and merge the changes made with your work before you can push again.

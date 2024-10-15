@@ -7,19 +7,19 @@ from datetime import date, datetime
 
 # courses
 courses_list = [
-        {"name": "Introduction to Python", "category": "Programming", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Web Development Basics", "category": "Web Development", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Data Science with Python", "category": "Data Science", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Machine Learning 101", "category": "Artificial Intelligence", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Digital Marketing", "category": "Marketing", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Graphic Design Essentials", "category": "Design", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Business Management", "category": "Business", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Financial Analysis", "category": "Finance", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Cybersecurity Basics", "category": "IT", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Ethical Hacking", "category": "IT", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Mobile App Development", "category": "Mobile Development", "image_url": "https://via.placeholder.com/400x300"},
-        {"name": "Blockchain Fundamentals", "category": "Blockchain", "image_url": "https://via.placeholder.com/400x300"},
-    ]
+    {"name": "Introduction to Python", "category": "Programming", "image_url": "https://via.placeholder.com/400x300", "price": "Free", "level": "Beginner"},
+    {"name": "Web Development Basics", "category": "Web Development", "image_url": "https://via.placeholder.com/400x300", "price": "$49", "level": "Beginner"},
+    {"name": "Data Science with Python", "category": "Data Science", "image_url": "https://via.placeholder.com/400x300", "price": "$99", "level": "Intermediate"},
+    {"name": "Machine Learning 101", "category": "Artificial Intelligence", "image_url": "https://via.placeholder.com/400x300", "price": "$129", "level": "Intermediate"},
+    {"name": "Digital Marketing", "category": "Marketing", "image_url": "https://via.placeholder.com/400x300", "price": "$79", "level": "Beginner"},
+    {"name": "Graphic Design Essentials", "category": "Design", "image_url": "https://via.placeholder.com/400x300", "price": "$69", "level": "Beginner"},
+    {"name": "Business Management", "category": "Business", "image_url": "https://via.placeholder.com/400x300", "price": "$89", "level": "Intermediate"},
+    {"name": "Financial Analysis", "category": "Finance", "image_url": "https://via.placeholder.com/400x300", "price": "$109", "level": "Intermediate"},
+    {"name": "Cybersecurity Basics", "category": "IT", "image_url": "https://via.placeholder.com/400x300", "price": "Free", "level": "Beginner"},
+    {"name": "Ethical Hacking", "category": "IT", "image_url": "https://via.placeholder.com/400x300", "price": "$149", "level": "Advanced"},
+    {"name": "Mobile App Development", "category": "Mobile Development", "image_url": "https://via.placeholder.com/400x300", "price": "$99", "level": "Intermediate"},
+    {"name": "Blockchain Fundamentals", "category": "Blockchain", "image_url": "https://via.placeholder.com/400x300", "price": "$119", "level": "Advanced"},
+]
 
 views = Blueprint('views', __name__)
 
