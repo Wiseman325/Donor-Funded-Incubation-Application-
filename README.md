@@ -7,7 +7,7 @@
 2. Run "*python main.py*" on your terminal
 - if you are having problems with the terminal running because of libraries not installed? run "*pip install requirements.txt*"
 
-# Constributors Commands
+# Contributors Commands
 1. Accept Invitation
 2. Create a codespace under this project, make sure you **did not** fork the project. Delete any forks if they exists.
 ![image](https://github.com/user-attachments/assets/9b991e24-aeb2-4211-b774-0a30cce96e67)
