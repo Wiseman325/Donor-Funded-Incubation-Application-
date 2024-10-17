@@ -23,3 +23,7 @@
 - If you have worked on your code and founded our you are behind?
 -- use **git pull** to pull changes
 - Unable to push/sync changes? If you have commited changes and later found out you are behind, no problem, just type **git pull --rebase**. this will pull and merge the changes made with your work before you can push again.
+
+### How to Find and Assign missing tasks
+- To find taska that have not yet been completed or you plan on doing something lated. Just leave it in a todo. Locate the file, **tasks.todo** and see a list of tasks that have not been done. You can add or remove tasks depending on the completion. This helps others to know what's missing.
+- If it's missing, then it's already done. :)
