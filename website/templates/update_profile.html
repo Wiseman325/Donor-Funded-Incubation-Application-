@@ -10,10 +10,10 @@
                     <h4>Settings</h4>
                     <ul class="nav nav-tabs" id="settingsTabs">
                         <li class="nav-item" onclick="gotoProfile()">
-                            <a class="nav-link active" href="#">Profile</a>
+                            <a class="text-decoration-none nav-link active" id="profileTab" href="#">Profile</a>
                         </li>
                         <li class="nav-item" onclick="gotoSecurity()">
-                            <a class="nav-link" href="#">Security</a>
+                            <a class="text-decoration-none nav-link" id="securityTab" href="#">Security</a>
                         </li>
                     </ul>
                 </div>
@@ -93,14 +93,21 @@
     let sharedCard = document.getElementById('sharedCard');
     let profileForm = document.getElementById('profileForm');
     let securityForm = document.getElementById('securityForm');
+    let profileTab = document.getElementById('profileTab');
+    let securityTab = document.getElementById('securityTab');
 
     function gotoProfile() {
         securityForm.style.display = "none";
+        securityTab.classList.remove('active');
         profileForm.style.display = "block";
+        profileTab.classList.add('active');
+
     }
     function gotoSecurity() {
         profileForm.style.display = "none";
+        profileTab.classList.remove('active');
         securityForm.style.display = "block";
+        securityTab.classList.add('active');
     }
 </script>
 {% endblock %}
