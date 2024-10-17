@@ -114,21 +114,56 @@
   </style>
   {% block styles %}{% endblock %}
 
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('views.home') }}">YUI Inc</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- App Name -->
+      <a class="navbar-brand" href="#">YUI</a>
+      <!-- Navbar Toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Donate</a>
+          </li>
+          {% if user %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page"
+              href="{{ url_for('views.update_profile', user_id=user._id) }}">{{ user.first_name }}</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
+
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+  <!-- Bootstrap JS with Popper.js -->
+  <!-- Bootstrap JS for the dropdown functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-QKTXLM07I6JIXeZnJ6pMddhTvBmvk/7vWPJdXvoJ8wLsktOADZ7OW/s6fdvN69JO"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz4fnFO9gybGmtkJ4pKIe/8fTXJpK/rR2zpPgtxLBV+NfU8AKW+JujKgsm"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-mQ93Hni0Hk+O8R+pZZiuWvntFdq4ELT6EUXzqLURJxVbRrj50hDdjV9VD3ckn0Jq"
+    crossorigin="anonymous"></script>
 
   <title>{% block title %}{% endblock %}</title>
 </head>
@@ -157,7 +192,8 @@
   {% endif %}
   {% endwith %}
 
-  {% block content%}{% endblock%}
+  {% block content %}{% endblock %}
+  {% block js %}{% endblock %}
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -171,10 +207,12 @@
   <br>
   <footer class="bg-dark text-white text-center py-2 fixed-bottom">
     <p>&copy; 2024 Bursary Boost. All rights reserved.</p>
-</footer>
+  </footer>
 
   <!-- JS Bundle-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
