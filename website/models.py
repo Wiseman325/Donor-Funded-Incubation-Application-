@@ -6,6 +6,7 @@ from sqlalchemy import Column, Date, DateTime, String, Integer, Text
 import os
 from werkzeug.utils import secure_filename
 
+
 class User(db.Model, UserMixin):
     _id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
@@ -64,7 +65,7 @@ class User(db.Model, UserMixin):
     def delete_other_supporting_documents(self):
         self.delete_file('other_supporting_documents')
 
-
+"""
 class Course(db.Model):
     _id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -115,3 +116,39 @@ class Application(db.Model):
     course = db.Column(db.String(100), nullable=False)
     financial_need = db.Column(db.Text, nullable=False)
     last_grade = db.Column(db.String(50), nullable=False)
+"""
+
+class Course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    description = db.Column(db.String(250))
+    duration = db.Column(db.String(25))
+    price = db.Column(db.Integer)
+
+class Student(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    id_number = db.Column(db.Integer, unique=True)
+    first_name = db.Column(db.String(25))
+    last_name = db.Column(db.String(25))
+    DOB = db.Column(db.Date)
+    race = db.Column(db.String(25))
+    nationality = db.Column(db.String(25))
+    phone_number = db.Column(db.Integer)
+    email_address = db.Column(db.String(50))
+    physical_address = db.Column(db.String(100))
+    highest_grade = db.Column(db.String(25))
+    financial_status = db.Column(String(25))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+
+class FinancialAid(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+class Donor(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+
+class Certificate(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+class Payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+

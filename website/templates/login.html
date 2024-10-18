@@ -23,6 +23,10 @@
                         <form method="POST" action="login">
                             {{ form.hidden_tag() }}
                             <div class="form-group">
+                                {{ form.role.label(class="form-label") }}
+                                {{ form.role(class="form-control") }}
+                            </div>
+                            <div class="form-group">
                                 {{ form.email.label(class="form-label") }}
                                 {{ form.email(class="form-control") }}
                             </div>
@@ -35,7 +39,7 @@
                                 {{ form.submit_btn(class="btn btn-primary")}}
                             </div>
                             <br>
-                            <p>Don't have an account? <a href="/sign-up" class="float-right"> Register</a></p>
+                            <p>Don't have an account? <a href="/sign-up"> Register</a></p>
                         </form>
                     </div>
                 </div>

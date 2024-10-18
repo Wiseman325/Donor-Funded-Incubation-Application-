@@ -1,1 +1,8 @@
 1. Finish the update profile part form image if image upload (profile pic) is allowed.
+2. Implement donor registration
+3. implement role based login
+4. Implement payment methods after donor registration
+5. After login place name of person on right hand side
+
+# Questions?
+- Will donors save their banking details on the app?
